@@ -96,20 +96,33 @@ export default {
       }
       this.questionsAnswered++;
     },
+    reset() {
+      this.totalCorrect = 0;
+      this.questionsAnswered = 0;
+    },
   },
 };
 </script>
 
 <template>
   <div class="ctr">
-    <questions
-      v-if="questionsAnswered < questions.length"
-      :questions="questions"
-      :questionsAnswered="questionsAnswered"
-      @question-answered="questionsAnsweredHandler"
-    />
-    <result v-else />
-    <button type="button" class="reset-btn">Reset</button>
+    <transition name="fade" mode="out-in">
+      <questions
+        v-if="questionsAnswered < questions.length"
+        :questions="questions"
+        :questionsAnswered="questionsAnswered"
+        @question-answered="questionsAnsweredHandler"
+      />
+      <result v-else :results="results" :totalCorrect="totalCorrect" />
+    </transition>
+    <button
+      type="button"
+      class="reset-btn"
+      @click.prevent="reset"
+      v-if="this.questionsAnswered === questions.length"
+    >
+      Reset
+    </button>
   </div>
 </template>
 
