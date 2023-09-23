@@ -8,7 +8,7 @@
       class="single-question"
       v-for="(question, index) in questions"
       :key="question.q"
-      v-show="index === questionsAnsweered"
+      v-show="index === questionsAnswered"
     >
       <div class="question">{{ question.q }}</div>
       <div class="answers">
@@ -27,7 +27,7 @@
 
 <script>
 export default {
-  props: ["questions","questionsAnsweered"],
+  props: ["questions","questionsAnswered"],
   emits: ["question-answered"],
   methods: {
     selectAnswer(is_correct){
